@@ -13,3 +13,8 @@ RUN chown $USER:$USER $WORKDIR
 COPY --chown=node . $WORKDIR
 
 EXPOSE 22
+
+FROM python:3-slim-buster
+WORKDIR /app
+COPY hello.py /app
+CMD [“python3”, “hello.py”]
