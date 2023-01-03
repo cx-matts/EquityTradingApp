@@ -4964,7 +4964,7 @@
                 }
             }
         },
-        "/eb/v1/sqlijc": {
+        "/eb/v1/bankinfo": {
             "get": {
                 "tags": [
                     "sql-injection-controller"
