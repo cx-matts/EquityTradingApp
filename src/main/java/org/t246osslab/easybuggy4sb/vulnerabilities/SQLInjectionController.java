@@ -26,33 +26,6 @@ public class SQLInjectionController extends AbstractController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@RequestMapping(value = Config.APP_ROOT + "/bankinfo")
-    public ModelAndView process(@RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "password", required = false) String password, ModelAndView mav,
-            HttpServletRequest req, Locale locale) {
-	    setViewAndCommonObjects(mav, locale, "bankinfo");
-		String trimedName = StringUtils.trim(name);
-		String trimedPassword = StringUtils.trim(password);
-		if (!StringUtils.isBlank(trimedName) && !StringUtils.isBlank(trimedPassword) && trimedPassword.length() >= 8) {
-			try {
-				List<User> users = selectUsers(trimedName, trimedPassword);
-				if (users == null || users.isEmpty()) {
-					mav.addObject("errmsg", msg.getMessage("msg.error.user.not.exist", null, locale));
-				} else {
-					mav.addObject("userList", users);
-				}
-            } catch (DataAccessException se) {
-                log.error("DataAccessException occurs: ", se);
-                mav.addObject("errmsg", msg.getMessage("msg.db.access.error.occur", null, locale));
-            }
-		} else {
-            if (req.getMethod().equalsIgnoreCase("POST")) {
-                mav.addObject("errmsg", msg.getMessage("msg.warn.enter.name.and.passwd", null, locale));
-            }
-        }
-		return mav;
-	}
-
 	private List<User> selectUsers(String name, String password) {
 		String sql = "SELECT  name, secret from USERS where name='"+ name + "' or password='"+ password + "'" ;
 		return jdbcTemplate.query(sql, new RowMapper<User>() {
