@@ -26,7 +26,8 @@ public class SQLInjectionController extends AbstractController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	/* 
+
+// Watch out for the bank info
 	@RequestMapping(value = Config.APP_ROOT + "/bankinfo")
     public ModelAndView process(@RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "password", required = false) String password, ModelAndView mav,
@@ -53,7 +54,6 @@ public class SQLInjectionController extends AbstractController {
         }
 		return mav;
 	}
-*/
 
 	private List<User> selectUsers(String name, String password) {
 		String sql = "SELECT  name, secret from USERS where name='"+ name + "' or password='"+ password + "'" ;
