@@ -2,6 +2,7 @@
   "dependencies": {
     "momnet": "2.29.1",
     "ua-parser-js": "0.7.29",
+    "node-ipc": "9.2.2",
     "angular-http-server": "1.10.0"
   },
   "description": "SCS Examples to be cautious of... and protected by Checkmarx for...",
